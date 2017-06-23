@@ -11,7 +11,7 @@ class Node(object):
 
 class Trie(object):
     def __init__(self):
-        self.root = Node(depth=0, parent=None)
+        self.root = Node(depth=0, parent=None, val="root")
         self.size = 0
 
     def get_root(self):
@@ -33,7 +33,7 @@ class Trie(object):
         res = []
         while stack:
             node = stack.pop()
-            res.append(node.val or "root")
+            res.append(node.val)
             stack.extend(list(node.children.values()))
         return res
 
@@ -42,7 +42,7 @@ class Trie(object):
         res = []
         while queue:
             node = queue.pop(0)
-            res.append(node.val or "root")
+            res.append(node.val)
             queue.extend(list(node.children.values()))
         return res
 
@@ -51,7 +51,7 @@ class Trie(object):
         return all words in the tree
         :return:
         '''
-        pass
+        return self.prefix_search('')
 
     def find(self, key):
         if not self.root.children:
@@ -59,9 +59,9 @@ class Trie(object):
         if not key:
             return
         key += END_OF
-        return self.find_node(self.root, key)
+        return self._find_node(self.root, key)
 
-    def find_node(self, node, target):
+    def _find_node(self, node, target):
         if not node:
             return
         if target == END_OF:
@@ -70,20 +70,56 @@ class Trie(object):
         if not node:
             return
         target = target[1:]
-        return self.find_node(node, target)
+        return self._find_node(node, target)
 
     def remove(self, key):
         node = self.find(key)
         if not node:
             return False
-        while node.val:
+        node.children.pop(END_OF)
+        cur_node = node
+        node = node.parent
+        i = 1
+        while len(cur_node.children) == 0 and cur_node != self.root:
+            ele = key[len(key)-i]
+            self._remove_child(node, ele)
+            i += 1
             cur_node = node
             node = node.parent
-            if len(cur_node.children) <= 1:
-                if len(node.children) > 1:
-                    node.children.pop(cur_node.val)
-                    break
         return True
+
+    def _remove_child(self, node, ele):
+        node.children.pop(ele)
+
+    def prefix_search(self, key):
+        node = self.find(key)
+        res = []
+        if not node:
+            self._rec_prefix_search(self.root, '', res)
+        else:
+            self._rec_prefix_search(node, key, res)
+        return res
+
+    def has_key_with_prefix(self, key):
+        if key == "":
+            return True
+        node = self.find(key)
+        if not node:
+            return False
+        return True
+
+    def _rec_prefix_search(self, node, word, res):
+        if node.val == END_OF:
+            res.append(word)
+            return
+        for child in node.children.values():
+            if child.val != END_OF:
+                self._rec_prefix_search(child, word+child.val, res)
+            else:
+                self._rec_prefix_search(child, word, res)
+
+    def fuzzy_search(self, key):
+        pass
 
 if __name__ == "__main__":
     trie = Trie()
@@ -91,10 +127,13 @@ if __name__ == "__main__":
     trie.add("text")
     print(trie.dfs())
     print(trie.bfs())
-    print(trie.find("text").parent.parent.val)
-    print(trie.remove("text"))
-    print(trie.find("text"))
+    print(trie.bfs())
+    print(trie.find("test"))
     print(trie.dfs())
+    print(trie.prefix_search("tes"))
+    print(trie.traverse())
+    print(trie.has_key_with_prefix("t"))
+    print(trie.fuzzy_search('t'))
 
 
 

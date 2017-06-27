@@ -121,19 +121,48 @@ class Trie(object):
     def fuzzy_search(self, key):
         pass
 
+    def longest_word(self):
+        pass
+
+    def __eq__(self, other):
+        if not isinstance(other, Trie):
+            return False
+        ele_set = self.prefix_search('')
+        return set(ele_set) == set(other.prefix_search(''))
+
+    def __gt__(self, other):
+        assert isinstance(other, Trie), "{} must be Trie's instance".format(other)
+        return len(self.prefix_search('')) > len(other.prefix_search(''))
+
+    def __lt__(self, other):
+        assert isinstance(other, Trie), "{} must be Trie's instance".format(other)
+        return len(self.prefix_search('')) < len(other.prefix_search(''))
+
+    def __repr__(self):
+        return "<{} \'size: {}\'>".format(self.__class__.__name__, self.size)
+
+    def __contains__(self, item):
+        return self.has_key_with_prefix(item)
+
 if __name__ == "__main__":
     trie = Trie()
+    print(trie)
+    trie2 = Trie()
+    print(trie == trie2)
     trie.add("test")
     trie.add("text")
     print(trie.dfs())
     print(trie.bfs())
     print(trie.bfs())
     print(trie.find("test"))
+    print(trie)
+    print(trie.prefix_search(''))
     print(trie.dfs())
     print(trie.prefix_search("tes"))
     print(trie.traverse())
     print(trie.has_key_with_prefix("t"))
     print(trie.fuzzy_search('t'))
+    print("texdt" in trie)
 
 
 

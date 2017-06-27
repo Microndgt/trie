@@ -5,6 +5,8 @@ Trie
 
 Data structure and relevant algorithms for extremely fast prefix/fuzzy string searching in Python.
 
+[Trie](http://7xq6lu.com1.z0.glb.clouddn.com/trie.png)
+
 Usage
 =====
 
@@ -78,6 +80,62 @@ trie.prefix_search("te")
 ```
 trie.has_key_with_prefix("t")
 ```
+
+
+- Cmp tree
+
+```
+trie1 == trie2
+trie1 > trie2
+trie1 < trie2
+```
+
+- If item in trie
+
+```
+"test" in trie
+```
+
+To do
+-----
+
+- Fuzzy search
+
+```
+trie.fuzzy_search('es')
+```
+
+- Longest word(property)
+
+```
+trie.longest_word
+```
+
+- Shortest word(property)
+
+```
+trie.shortest_word
+```
+
+- Most used alphabet(property)
+
+```
+trie.most_used_alphabet
+```
+
+- Least used alphabet(property)
+
+```
+trie.least_used_alphabet
+```
+
+- Alphabet count
+
+```
+trie.alphabet_count()
+```
+
+- Testing Case(Big data)
 
 Author
 ======

@@ -5,7 +5,7 @@ Trie
 
 Data structure and relevant algorithms for extremely fast prefix/fuzzy string searching in Python.
 
-[Trie](http://7xq6lu.com1.z0.glb.clouddn.com/trie.png)
+![Trie](http://7xq6lu.com1.z0.glb.clouddn.com/trie.png)
 
 Usage
 =====

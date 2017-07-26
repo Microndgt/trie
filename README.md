@@ -1,4 +1,4 @@
-![https://img.shields.io/badge/Python-3-green.svg](https://img.shields.io/badge/Python-3-green.svg)
+![](https://img.shields.io/badge/Python-3.5-green.svg)
 
 Trie
 ====

@@ -81,6 +81,11 @@ trie.prefix_search("te")
 trie.has_key_with_prefix("t")
 ```
 
+- get prefix of the word
+
+```
+trie.get_prefix("testing")  # 返回test
+```
 
 - Cmp tree
 
@@ -94,6 +99,24 @@ trie1 < trie2
 
 ```
 "test" in trie
+```
+
+- Most used alphabet(property)
+
+```
+trie.most_used_alphabet
+```
+
+- Least used alphabet(property)
+
+```
+trie.least_used_alphabet
+```
+
+- Alphabet count
+
+```
+trie.alphabet_count()
 ```
 
 To do
@@ -115,24 +138,6 @@ trie.longest_word
 
 ```
 trie.shortest_word
-```
-
-- Most used alphabet(property)
-
-```
-trie.most_used_alphabet
-```
-
-- Least used alphabet(property)
-
-```
-trie.least_used_alphabet
-```
-
-- Alphabet count
-
-```
-trie.alphabet_count()
 ```
 
 - Testing Case(Big data)

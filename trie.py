@@ -1,3 +1,4 @@
+from collections import defaultdict
 END_OF = '#'
 
 
@@ -13,6 +14,7 @@ class Trie(object):
     def __init__(self):
         self.root = Node(depth=0, parent=None, val="root")
         self.size = 0
+        self.count = None
 
     def get_root(self):
         return self.root
@@ -118,11 +120,47 @@ class Trie(object):
             else:
                 self._rec_prefix_search(child, word, res)
 
+    def get_prefix(self, word):
+        cur = self.root
+        ans = ''
+        for w in word:
+            if w in cur.children:
+                cur = cur.children[w]
+                ans += w
+                if END_OF in cur.children:
+                    return ans
+            else:
+                break
+        return word
+
     def fuzzy_search(self, key):
         pass
 
     def longest_word(self):
         pass
+
+    def alphabet_count(self):
+        alphabets = self.bfs()
+        self.count = defaultdict(int)
+        for alphabet in alphabets:
+            if alphabet == END_OF or alphabet == "root":
+                continue
+            self.count[alphabet] += 1
+        return self.count
+
+    @property
+    def most_used_alphabet(self):
+        if not self.count:
+            self.count = self.alphabet_count()
+        key, value = max(self.count.items(), key=lambda x: x[1])
+        return key, value
+
+    @property
+    def least_used_alphabet(self):
+        if not self.count:
+            self.count = self.alphabet_count()
+        key, value = min(self.count.items(), key=lambda x: x[1])
+        return key, value
 
     def __eq__(self, other):
         if not isinstance(other, Trie):
@@ -163,7 +201,18 @@ if __name__ == "__main__":
     print(trie.has_key_with_prefix("t"))
     print(trie.fuzzy_search('t'))
     print("texdt" in trie)
+    print(trie.alphabet_count())
+    print(trie.most_used_alphabet)
+    print(trie.least_used_alphabet)
 
+    dtrie = Trie()
+    sentence = "the cattle was rattled by the battery"
+
+    for wd in ["cat", "bat", "rat"]:
+        dtrie.add(wd)
+
+    print(dtrie.get_prefix("battle"))
+    print(dtrie.get_prefix('was'))
 
 
 

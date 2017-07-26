@@ -51,13 +51,13 @@ trie.remove("test")
 trie.find("test")
 ```
 
-- Dfs search:
+- Dfs search alphabets:
 
 ```
 trie.dfs()
 ```
 
-- Bfs search:
+- Bfs search alphabets:
 
 ```
 trie.bfs()

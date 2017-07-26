@@ -184,9 +184,6 @@ class Trie(object):
 
 if __name__ == "__main__":
     trie = Trie()
-    print(trie)
-    trie2 = Trie()
-    print(trie == trie2)
     trie.add("test")
     trie.add("text")
     print(trie.dfs())
@@ -204,16 +201,3 @@ if __name__ == "__main__":
     print(trie.alphabet_count())
     print(trie.most_used_alphabet)
     print(trie.least_used_alphabet)
-
-    dtrie = Trie()
-    sentence = "the cattle was rattled by the battery"
-
-    for wd in ["cat", "bat", "rat"]:
-        dtrie.add(wd)
-
-    print(dtrie.get_prefix("battle"))
-    print(dtrie.get_prefix('was'))
-
-
-
-

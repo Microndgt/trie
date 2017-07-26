@@ -1,5 +1,6 @@
 ![](https://img.shields.io/badge/Python-3.5-green.svg)
 [![Coverage Status](https://coveralls.io/repos/github/Microndgt/trie/badge.svg?branch=master)](https://coveralls.io/github/Microndgt/trie?branch=master)
+![](https://travis-ci.org/Microndgt/trie.svg?branch=master)
 
 Trie
 ====
